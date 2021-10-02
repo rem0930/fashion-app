@@ -1,9 +1,20 @@
 {% extends "app/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div class="my-5">
-    <h1>Hello World!!</h1>
+    
+    <div class="row">
+        {% for post in post_data %}
+        <div class="col-sm-4 mb-2">
+            {% if post.image %}
+            <a class="" href="{% url 'post_detail' post.id %}">
+                    <img class="w-100" src="{{ post.image.url }}" alt="">
+                </a>
+                {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "app/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="my-4">
+    <h2>投稿</h2>
+</div>
+
+<form method="post"　enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="formpost">
+        {{ form.image }}
+    </div>
+    <div class="formpost">
+        {% render_field form.comment class="form-control" placeholder="コメントを入力" %}
+    </div>
+    <div class="formpost">
+        {% render_field form.hashtag class="form-control" placeholder="hashtag" %}
+    </div>
+    <button class="btn btn-warning" type="submit">投稿する</button>
+</form>
+
+{% endblock %}

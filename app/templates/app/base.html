@@ -2,17 +2,57 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>fashion-app</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>カスタム認証チュートリアル</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <body>
+    <div class="container d-flex justify-content-between mt-3">
+      <img
+        class=""
+        style="width: 100px"
+        src="{% static 'img/logo.png' %}"
+        alt=""
+      />
+      <div class="d-flex">
+        {% if user.is_authenticated %}
+        <div class="">
+          <a href="{% url 'post_new' %}"
+            ><i class="far fa-plus-square fa-lg"></i
+          ></a>
+        </div>
+        <div class=""><i class="far fa-heart fa-lg"></i></div>
+        <div class="mx-3">
+          <img
+            class="rounded-circle"
+            style="hight: 30px; width: 30px"
+            src="https://placehold.jp/150x150.png"
+          />
+        </div>
+        {% else %}
+        <div class="">
+          <a class="nav-link" href="{% url 'account_signup' %}">サインアップ</a>
+        </div>
+        <div class="mx-2">
+          <a class="nav-link" href="{% url 'account_login' %}">ログイン</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -20,7 +60,7 @@
                 </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">プロフィール</a>
+                    <a class="nav-link" href="{% url 'profile' %}">ログイン</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">ログアウト</a>
@@ -35,22 +75,18 @@
             {% endif %}
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
     <main>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
-        </div>
+      <div class="container">{% block content %} {% endblock %}</div>
     </main>
 
     <footer class="py-2 bg-dark">
-        <p class="m-0 text-center text-white">Copyright &copy; Django Startup 2020</p>
+      <p class="m-0 text-center text-white">
+        Copyright &copy; Django Startup 2020
+      </p>
     </footer>
 
-    {% block extra_js %}
-    {% endblock %}
-
-</body>
-
+    {% block extra_js %} {% endblock %}
+  </body>
 </html>
