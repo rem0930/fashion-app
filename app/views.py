@@ -51,8 +51,9 @@ class PostEditView(LoginRequiredMixin, View):
         form = PostForm(
             request.POST or None,
             initial={
-                'title': post_data.title,
-                'content': post_data.content,
+                'image' : post_data.image,
+                'comment' : post_data.comment,
+                'hashtag' : post_data.hashtag,
             }
         )
 
@@ -65,8 +66,10 @@ class PostEditView(LoginRequiredMixin, View):
 
         if form.is_valid():
             post_data = Post.objects.get(id=self.kwargs['pk'])
-            post_data.title = form.cleaned_data['title']
-            post_data.content = form.cleaned_data['content']
+            if request.FILES:
+                post_data.image = request.FILES.get('image') # 追加
+            post_data.comment = form.cleaned_data['comment']
+            post_data.hashtag = form.cleaned_data['hashtag']
             post_data.save()
             return redirect('post_detail', self.kwargs['pk'])
 
